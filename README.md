@@ -92,8 +92,6 @@ src/
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgements
-- [Bootstrap](https://getbootstrap.com/) - Frontend framework
-- [Font Awesome](https://fontawesome.com/) - Icons
 - [BCrypt](https://github.com/patrickfav/bcrypt) - Password hashing
 - [JSTL](https://jakarta.ee/specifications/tags/3.0/) - JSP Standard Tag Library
 >>>>>>> f3e4a03 (Initial commit: All project files added from scratch)
