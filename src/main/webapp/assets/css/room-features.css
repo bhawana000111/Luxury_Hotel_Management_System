@@ -1,0 +1,29 @@
+.room-card-features {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.room-card-feature {
+    display: flex;
+    align-items: center;
+    color: var(--light-text);
+    font-size: 14px;
+    background-color: #f9f9f9;
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.room-card:hover .room-card-feature {
+    background-color: #f0f0f0;
+}
+
+.room-card-feature i {
+    margin-right: 8px;
+    color: var(--secondary-color);
+    width: 16px;
+    text-align: center;
+    font-size: 12px;
+}

@@ -1,0 +1,244 @@
+/*
+ * Responsive CSS for Luxury Hotel Management System
+ */
+
+/* Mobile Styles (up to 767px) */
+@media screen and (max-width: 767px) {
+    /* Global Styles */
+    .container {
+        padding: 0 15px;
+    }
+
+    .section {
+        padding: 40px 0;
+    }
+
+    .section-title h2 {
+        font-size: 28px;
+    }
+
+    /* Header */
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .navbar ul li {
+        margin: 5px 0;
+        margin-left: 0;
+    }
+
+    /* Hero Section */
+    .hero {
+        height: 400px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    /* Room Cards */
+    .room-card {
+        width: 100%;
+    }
+
+    /* Event Cards */
+    .event-card {
+        width: 100%;
+    }
+
+    /* Event Types */
+    .event-type {
+        min-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Blog Cards */
+    .blog-card {
+        width: 100%;
+    }
+
+    /* Staff Cards */
+    .staff-card {
+        width: calc(50% - 15px);
+    }
+
+    /* Booking Form */
+    .booking-container {
+        flex-direction: column;
+    }
+
+    .room-summary, .booking-form {
+        width: 100%;
+    }
+
+    /* Payment Form */
+    .payment-container {
+        flex-direction: column;
+    }
+
+    .booking-summary, .payment-form {
+        width: 100%;
+    }
+
+    /* Advanced Search */
+    .search-row {
+        flex-direction: column;
+    }
+
+    .search-group {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    /* Dashboard */
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .dashboard-sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .dashboard-content {
+        width: 100%;
+    }
+
+    .dashboard-table {
+        overflow-x: auto;
+    }
+
+    /* Profile */
+    .profile-container {
+        flex-direction: column;
+    }
+
+    .profile-sidebar, .profile-content {
+        width: 100%;
+    }
+
+    .profile-sidebar {
+        margin-bottom: 20px;
+    }
+}
+
+/* Tablet Styles (768px - 991px) */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    /* Room Cards */
+    .room-card {
+        width: calc(50% - 15px);
+    }
+
+    /* Event Cards */
+    .event-card {
+        width: calc(50% - 15px);
+    }
+
+    /* Event Types */
+    .event-type {
+        min-width: 200px;
+    }
+
+    /* Blog Cards */
+    .blog-card {
+        width: calc(50% - 15px);
+    }
+
+    /* Staff Cards */
+    .staff-card {
+        width: calc(33.33% - 15px);
+    }
+
+    /* Booking Form */
+    .booking-container {
+        flex-direction: column;
+    }
+
+    .room-summary, .booking-form {
+        width: 100%;
+    }
+
+    /* Dashboard */
+    .dashboard-sidebar {
+        width: 30%;
+    }
+
+    .dashboard-content {
+        width: 70%;
+    }
+}
+
+/* Large Screens (992px and up) */
+@media screen and (min-width: 992px) {
+    /* Room Cards */
+    .room-card {
+        width: calc(33.33% - 20px);
+    }
+
+    /* Event Cards */
+    .event-card {
+        width: calc(33.33% - 20px);
+    }
+
+    /* Blog Cards */
+    .blog-card {
+        width: calc(33.33% - 20px);
+    }
+
+    /* Staff Cards */
+    .staff-card {
+        width: calc(25% - 20px);
+    }
+
+    /* Booking Form */
+    .booking-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .room-summary {
+        width: 40%;
+    }
+
+    .booking-form {
+        width: 55%;
+    }
+
+    /* Dashboard */
+    .dashboard {
+        display: flex;
+    }
+
+    .dashboard-sidebar {
+        width: 20%;
+    }
+
+    .dashboard-content {
+        width: 80%;
+    }
+
+    /* Profile */
+    .profile-container {
+        display: flex;
+    }
+
+    .profile-sidebar {
+        width: 30%;
+    }
+
+    .profile-content {
+        width: 70%;
+    }
+}
