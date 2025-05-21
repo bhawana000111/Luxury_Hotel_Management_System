@@ -94,6 +94,12 @@ public class BookingController extends HttpServlet {
         int userId = SessionUtil.getLoggedInUserId(request);
         List<Booking> bookings = bookingDAO.getAllByUserId(userId);
 
+        // Get billing information for each booking
+        for (Booking booking : bookings) {
+            Billing billing = billingDAO.getByBookingId(booking.getId());
+            booking.setBilling(billing);
+        }
+
         request.setAttribute("bookings", bookings);
         request.getRequestDispatcher("/bookings.jsp").forward(request, response);
     }

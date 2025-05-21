@@ -1,5 +1,7 @@
 package com.hotel.controller;
 
+import com.hotel.model.Billing;
+import com.hotel.model.BillingDAO;
 import com.hotel.model.Booking;
 import com.hotel.model.BookingDAO;
 import com.hotel.model.Payment;
@@ -32,12 +34,14 @@ public class PaymentController extends HttpServlet {
     private PaymentDAO paymentDAO;
     private BookingDAO bookingDAO;
     private RoomDAO roomDAO;
+    private BillingDAO billingDAO;
 
     @Override
     public void init() {
         paymentDAO = new PaymentDAO();
         bookingDAO = new BookingDAO();
         roomDAO = new RoomDAO();
+        billingDAO = new BillingDAO();
     }
 
     /**
@@ -62,6 +66,14 @@ public class PaymentController extends HttpServlet {
      */
     public void setRoomDAO(RoomDAO roomDAO) {
         this.roomDAO = roomDAO;
+    }
+
+    /**
+     * Set the BillingDAO (for testing)
+     * @param billingDAO The BillingDAO to use
+     */
+    public void setBillingDAO(BillingDAO billingDAO) {
+        this.billingDAO = billingDAO;
     }
 
     @Override
@@ -179,9 +191,13 @@ public class PaymentController extends HttpServlet {
         String amountParam = request.getParameter("amount");
         String paymentMethod = request.getParameter("paymentMethod");
 
+        // Default to CREDIT_CARD if payment method is not provided
+        if (paymentMethod == null || paymentMethod.trim().isEmpty()) {
+            paymentMethod = "CREDIT_CARD";
+        }
+
         if (bookingIdParam != null && !bookingIdParam.trim().isEmpty() &&
-            amountParam != null && !amountParam.trim().isEmpty() &&
-            paymentMethod != null && !paymentMethod.trim().isEmpty()) {
+            amountParam != null && !amountParam.trim().isEmpty()) {
 
             try {
                 int bookingId = Integer.parseInt(bookingIdParam);
@@ -221,6 +237,24 @@ public class PaymentController extends HttpServlet {
                                 booking.setStatus("CONFIRMED");
                                 bookingDAO.update(booking);
 
+                                // Update or create billing record
+                                Billing billing = billingDAO.getByBookingId(bookingId);
+                                if (billing != null) {
+                                    billing.setAmount(amount);
+                                    billing.setPaymentMethod(paymentMethod);
+                                    billing.setStatus("PAID");
+                                    billing.setPaidOn(new java.sql.Timestamp(System.currentTimeMillis()));
+                                    billing.setTransactionId("TXN" + System.currentTimeMillis());
+                                    billingDAO.update(billing);
+                                } else {
+                                    billing = new Billing(bookingId, amount);
+                                    billing.setPaymentMethod(paymentMethod);
+                                    billing.setStatus("PAID");
+                                    billing.setPaidOn(new java.sql.Timestamp(System.currentTimeMillis()));
+                                    billing.setTransactionId("TXN" + System.currentTimeMillis());
+                                    billingDAO.create(billing);
+                                }
+
                                 response.sendRedirect(request.getContextPath() + "/paymentSuccess?id=" + existingPayment.getId());
                             } else {
                                 response.sendRedirect(request.getContextPath() + "/paymentCancel?id=" + existingPayment.getId());
@@ -244,6 +278,14 @@ public class PaymentController extends HttpServlet {
                                 // Update booking status
                                 booking.setStatus("CONFIRMED");
                                 bookingDAO.update(booking);
+
+                                // Create billing record
+                                Billing billing = new Billing(bookingId, amount);
+                                billing.setPaymentMethod(paymentMethod);
+                                billing.setStatus("PAID");
+                                billing.setPaidOn(new java.sql.Timestamp(System.currentTimeMillis()));
+                                billing.setTransactionId("TXN" + System.currentTimeMillis());
+                                billingDAO.create(billing);
 
                                 response.sendRedirect(request.getContextPath() + "/paymentSuccess?id=" + paymentId);
                             } else {
