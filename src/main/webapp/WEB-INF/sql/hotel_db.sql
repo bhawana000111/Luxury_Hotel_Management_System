@@ -101,8 +101,18 @@ CREATE TABLE IF NOT EXISTS events (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+-- Create contacts table
+CREATE TABLE IF NOT EXISTS contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Insert admin user
-INSERT INTO users (name, email, password, role) VALUES 
+INSERT INTO users (name, email, password, role) VALUES
 ('Admin User', 'admin@hotel.com', '$2a$12$ZlgRYBGQVF0U0zOQgiqJ2.Jqw3KOQ0Oi2H9Jn.LQSvXkqJIxTOIWW', 'ADMIN');
 -- Password: admin123
 
