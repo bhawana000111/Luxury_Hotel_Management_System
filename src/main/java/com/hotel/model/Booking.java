@@ -21,6 +21,7 @@ public class Booking {
     private String userName;
     private String roomNumber;
     private String roomType;
+    private Billing billing; // For storing billing information
 
     // Default constructor
     public Booking() {
@@ -143,6 +144,14 @@ public class Booking {
 
     public void setRoomType(String roomType) {
         this.roomType = roomType;
+    }
+
+    public Billing getBilling() {
+        return billing;
+    }
+
+    public void setBilling(Billing billing) {
+        this.billing = billing;
     }
 
     @Override
