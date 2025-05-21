@@ -9,27 +9,113 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <style>
+        .contact-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .contact-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .contact-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .contact-form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-control {
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #5a3921;
+            box-shadow: 0 0 0 3px rgba(90, 57, 33, 0.1);
+        }
+
+        .btn-submit {
+            background-color: #5a3921;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background-color: #4a2e1a;
+            transform: translateY(-2px);
+        }
+
+        .success-message {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .success-message i {
+            font-size: 24px;
+            color: #4caf50;
+            margin-right: 15px;
+        }
+
+        .error-message {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <!-- Include Header -->
     <jsp:include page="partials/header.jsp" />
-    
+
     <!-- Page Header -->
     <section class="page-header" style="background-image: url('${pageContext.request.contextPath}/assets/images/contact_header.jpg');">
         <div class="container">
             <h1>Contact Us</h1>
         </div>
     </section>
-    
+
     <!-- Contact Section -->
     <section class="section">
         <div class="container">
+            <div class="section-title">
+                <h2>Get in Touch</h2>
+                <div class="title-underline"></div>
+                <p>We'd love to hear from you. Please feel free to contact us with any questions or inquiries.</p>
+            </div>
+
             <div class="contact-content">
                 <div class="row">
                     <div class="contact-info">
-                        <h2>Get in Touch</h2>
-                        <p>We'd love to hear from you. Please feel free to contact us with any questions or inquiries.</p>
-                        
+                        <div class="contact-image">
+                            <img src="${pageContext.request.contextPath}/assets/images/contact us background.webp" alt="Luxury Hotel Lobby">
+                        </div>
+
                         <div class="contact-details">
                             <div class="contact-item">
                                 <i class="fas fa-map-marker-alt"></i>
@@ -61,11 +147,27 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="contact-form">
                         <h2>Send us a Message</h2>
-                        
-                        <form action="#" method="post">
+
+                        <c:if test="${success == true}">
+                            <div class="success-message">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <h3>Thank You for Contacting Us!</h3>
+                                    <p>Dear ${name}, we have received your message and will get back to you as soon as possible.</p>
+                                </div>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${not empty error}">
+                            <div class="error-message">
+                                <p><i class="fas fa-exclamation-circle"></i> ${error}</p>
+                            </div>
+                        </c:if>
+
+                        <form action="${pageContext.request.contextPath}/submitContact" method="post" id="contactForm">
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" id="name" name="name" class="form-control" required>
@@ -83,7 +185,7 @@
                                 <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Send Message</button>
+                                <button type="submit" class="btn-submit">Send Message</button>
                             </div>
                         </form>
                     </div>
@@ -91,7 +193,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Map Section -->
     <section class="section bg-light">
         <div class="container">
@@ -104,10 +206,10 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Include Footer -->
     <jsp:include page="partials/footer.jsp" />
-    
+
     <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
 </body>
 </html>

@@ -127,7 +127,14 @@
                             <div class="booking-card">
                                 <div class="booking-card-header">
                                     <h3>Booking #${booking.id}</h3>
-                                    <span class="booking-status ${booking.status.toLowerCase()}">${booking.status}</span>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <c:if test="${not empty booking.billing && booking.billing.status eq 'PAID'}">
+                                            <span style="background-color: #4CAF50; color: white; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+                                                <i class="fas fa-check-circle"></i> PAID
+                                            </span>
+                                        </c:if>
+                                        <span class="booking-status ${booking.status.toLowerCase()}">${booking.status}</span>
+                                    </div>
                                 </div>
                                 <div class="booking-card-body">
                                     <div class="booking-details">

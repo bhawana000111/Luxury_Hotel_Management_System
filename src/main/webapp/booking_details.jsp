@@ -207,13 +207,30 @@
                                         <span>$${billing.amount}</span>
                                     </div>
                                     <div style="margin-top: 15px;">
-                                        <p><strong>Payment Status:</strong> ${billing.status}</p>
-                                        <c:if test="${not empty billing.paidOn}">
-                                            <p><strong>Paid On:</strong> ${billing.paidOn}</p>
-                                        </c:if>
-                                        <c:if test="${not empty billing.paymentMethod}">
-                                            <p><strong>Payment Method:</strong> ${billing.paymentMethod}</p>
-                                        </c:if>
+                                        <c:choose>
+                                            <c:when test="${billing.status eq 'PAID'}">
+                                                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                                    <div style="background-color: #4CAF50; color: white; padding: 8px 15px; border-radius: 30px; display: inline-block; font-weight: bold; font-size: 18px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-right: 10px;">
+                                                        <i class="fas fa-check-circle"></i> PAID
+                                                    </div>
+                                                    <span style="color: #4CAF50; font-weight: 500;">Payment completed successfully</span>
+                                                </div>
+                                                <p><strong>Paid On:</strong> ${billing.paidOn}</p>
+                                                <p><strong>Payment Method:</strong> ${billing.paymentMethod}</p>
+                                                <c:if test="${not empty billing.transactionId}">
+                                                    <p><strong>Transaction ID:</strong> ${billing.transactionId}</p>
+                                                </c:if>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <p><strong>Payment Status:</strong> ${billing.status}</p>
+                                                <c:if test="${not empty billing.paidOn}">
+                                                    <p><strong>Paid On:</strong> ${billing.paidOn}</p>
+                                                </c:if>
+                                                <c:if test="${not empty billing.paymentMethod}">
+                                                    <p><strong>Payment Method:</strong> ${billing.paymentMethod}</p>
+                                                </c:if>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </c:when>
                                 <c:otherwise>

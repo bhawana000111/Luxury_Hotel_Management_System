@@ -19,7 +19,9 @@
                 <h1>Welcome Back to</h1>
                 <h1>Luxury Hotel</h1>
                 <p>Experience luxury and comfort like never before. Login to access your account and improve your stay.</p>
-                <a href="${pageContext.request.contextPath}/" class="btn btn-outline">Return to Home</a>
+                <a href="${pageContext.request.contextPath}/" class="btn btn-outline" style="background-color: rgba(255,255,255,0.2); border: 2px solid white; padding: 12px 25px; font-size: 18px; font-weight: 600; margin-top: 20px; display: inline-block; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.3)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.backgroundColor='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
+                    <i class="fas fa-home"></i> Return to Home
+                </a>
             </div>
         </div>
 
@@ -66,6 +68,11 @@
                 <div class="login-footer">
                     <p>Don't have an account? <a href="${pageContext.request.contextPath}/register">Register</a></p>
                     <p style="margin-top: 10px; font-size: 12px;"><a href="${pageContext.request.contextPath}/session_debug.jsp" style="color: #999;">View Session Debug</a></p>
+                    <div style="margin-top: 20px; text-align: center;">
+                        <a href="${pageContext.request.contextPath}/" class="btn-home" style="display: inline-block; background-color: #f9f7f4; color: #5a3921; border: 2px solid #5a3921; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: 500; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#5a3921'; this.style.color='white'; this.style.transform='translateY(-3px)';" onmouseout="this.style.backgroundColor='#f9f7f4'; this.style.color='#5a3921'; this.style.transform='translateY(0)'">
+                            <i class="fas fa-home"></i> Return to Home
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

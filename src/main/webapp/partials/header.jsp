@@ -36,9 +36,9 @@
             <div class="nav-container">
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="${pageContext.request.contextPath}/index.jsp" class="${pageContext.request.servletPath eq '/index.jsp' ? 'active' : ''}">Home</a></li>
-                    <li><a href="${pageContext.request.contextPath}/rooms" class="${pageContext.request.servletPath eq '/rooms' ? 'active' : ''}">Rooms</a></li>
-                    <li><a href="${pageContext.request.contextPath}/events" class="${pageContext.request.servletPath eq '/events' ? 'active' : ''}">Events</a></li>
-                    <li><a href="${pageContext.request.contextPath}/blog" class="${pageContext.request.servletPath eq '/blog' ? 'active' : ''}">Blog</a></li>
+                    <li><a href="${pageContext.request.contextPath}/rooms.jsp" class="${pageContext.request.servletPath eq '/rooms.jsp' ? 'active' : ''}">Rooms</a></li>
+                    <li><a href="${pageContext.request.contextPath}/events.jsp" class="${pageContext.request.servletPath eq '/events.jsp' ? 'active' : ''}">Events</a></li>
+                    <li><a href="${pageContext.request.contextPath}/blog.jsp" class="${pageContext.request.servletPath eq '/blog.jsp' ? 'active' : ''}">Blog</a></li>
                     <li><a href="${pageContext.request.contextPath}/about.jsp" class="${pageContext.request.servletPath eq '/about.jsp' ? 'active' : ''}">About Us</a></li>
                     <li><a href="${pageContext.request.contextPath}/contact.jsp" class="${pageContext.request.servletPath eq '/contact.jsp' ? 'active' : ''}">Contact</a></li>
                 </ul>

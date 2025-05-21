@@ -34,7 +34,7 @@
                                         <img src="${pageContext.request.contextPath}/${blog.imagePath}" alt="${blog.title}">
                                     </c:when>
                                     <c:otherwise>
-                                        <img src="${pageContext.request.contextPath}/assets/images/blog_default.jpg" alt="${blog.title}">
+                                        <img src="${pageContext.request.contextPath}/assets/images/abouts%20us%20background.webp" alt="${blog.title}">
                                     </c:otherwise>
                                 </c:choose>
                                 <div class="blog-card-content">
@@ -52,7 +52,8 @@
                         <!-- Fallback if no blogs are loaded -->
                         <c:if test="${empty blogs}">
                             <div class="blog-card">
-                                <img src="${pageContext.request.contextPath}/assets/images/welcome_post.jpg" alt="Welcome to Luxury Hotel">
+                                <img src="${pageContext.request.contextPath}/assets/images/contact%20us%20background.webp
+" alt="Welcome to Luxury Hotel">
                                 <div class="blog-card-content">
                                     <h3>Welcome to Luxury Hotel</h3>
                                     <div class="blog-meta">
@@ -64,7 +65,7 @@
                                 </div>
                             </div>
                             <div class="blog-card">
-                                <img src="${pageContext.request.contextPath}/assets/images/summer_offer.jpg" alt="Summer Special Offers">
+                                <img src="${pageContext.request.contextPath}/assets/images/summer%20offer.webp" alt="Summer Special Offers">
                                 <div class="blog-card-content">
                                     <h3>Summer Special Offers</h3>
                                     <div class="blog-meta">
@@ -76,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="blog-card">
-                                <img src="${pageContext.request.contextPath}/assets/images/chef_intro.jpg" alt="Meet Our Executive Chef">
+                                <img src="${pageContext.request.contextPath}/assets/images/Chefs_intro.webp" alt="Meet Our Executive Chef">
                                 <div class="blog-card-content">
                                     <h3>Meet Our Executive Chef</h3>
                                     <div class="blog-meta">

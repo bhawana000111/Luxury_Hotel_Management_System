@@ -10,6 +10,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <style>
+        .btn-pay {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-pay:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-pay:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
     <!-- Include Header -->
@@ -25,8 +53,9 @@
                 </div>
 
                 <c:if test="${not empty error}">
-                    <div class="alert alert-danger">
-                        ${error}
+                    <div class="alert alert-danger" style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 5px solid #f5c6cb;">
+                        <strong><i class="fas fa-exclamation-circle"></i> Error:</strong> ${error}
+                        <p style="margin-top: 10px; font-size: 14px;">If you're seeing a payment credential error, please try selecting a different payment method or refreshing the page.</p>
                     </div>
                 </c:if>
 
@@ -85,76 +114,73 @@
                     <div class="payment-methods">
                         <h3>Select Payment Method</h3>
 
-                        <div class="payment-method selected">
-                            <div class="payment-method-header">
-                                <label>
-                                    <input type="radio" name="paymentMethod" value="CREDIT_CARD" checked>
-                                    Credit Card
-                                </label>
-                                <div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px;">
+                            <div class="payment-option" style="flex: 1; min-width: 200px; border: 2px solid #5a3921; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onclick="selectPaymentMethod(this, 'CREDIT_CARD')">
+                                <input type="radio" name="paymentMethod" value="CREDIT_CARD" checked style="display: none;">
+                                <div style="font-size: 40px; color: #5a3921; margin-bottom: 15px;">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <h4 style="margin-bottom: 10px; color: #5a3921;">Credit Card</h4>
+                                <div style="display: flex; justify-content: center; gap: 10px;">
                                     <i class="fab fa-cc-visa fa-2x" style="color: #1a1f71;"></i>
                                     <i class="fab fa-cc-mastercard fa-2x" style="color: #eb001b;"></i>
                                     <i class="fab fa-cc-amex fa-2x" style="color: #006fcf;"></i>
                                 </div>
-                            </div>
-                            <div class="payment-method-details" style="margin-top: 15px;">
-                                <div class="form-group">
-                                    <label for="cardNumber">Card Number</label>
-                                    <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19">
-                                </div>
-                                <div style="display: flex; gap: 15px;">
-                                    <div class="form-group" style="flex: 1;">
-                                        <label for="expiryDate">Expiry Date</label>
-                                        <input type="text" id="expiryDate" class="form-control" placeholder="MM/YY" maxlength="5">
-                                    </div>
-                                    <div class="form-group" style="flex: 1;">
-                                        <label for="cvv">CVV</label>
-                                        <input type="text" id="cvv" class="form-control" placeholder="123" maxlength="3">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="cardName">Name on Card</label>
-                                    <input type="text" id="cardName" class="form-control" placeholder="John Doe">
+                                <div class="selected-mark" style="position: absolute; top: 10px; right: 10px; color: #4CAF50; font-size: 20px;">
+                                    <i class="fas fa-check-circle"></i>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="payment-method">
-                            <div class="payment-method-header">
-                                <label>
-                                    <input type="radio" name="paymentMethod" value="PAYPAL">
-                                    PayPal
-                                </label>
-                                <div>
-                                    <i class="fab fa-paypal fa-2x" style="color: #003087;"></i>
+                            <div class="payment-option" style="flex: 1; min-width: 200px; border: 2px solid #ddd; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onclick="selectPaymentMethod(this, 'PAYPAL')">
+                                <input type="radio" name="paymentMethod" value="PAYPAL" style="display: none;">
+                                <div style="font-size: 40px; color: #003087; margin-bottom: 15px;">
+                                    <i class="fab fa-paypal"></i>
+                                </div>
+                                <h4 style="margin-bottom: 10px; color: #333;">PayPal</h4>
+                                <p style="color: #666; font-size: 14px;">Pay securely with PayPal</p>
+                                <div class="selected-mark" style="position: absolute; top: 10px; right: 10px; color: #4CAF50; font-size: 20px; display: none;">
+                                    <i class="fas fa-check-circle"></i>
                                 </div>
                             </div>
-                            <div class="payment-method-details" style="margin-top: 15px; display: none;">
-                                <p>You will be redirected to PayPal to complete your payment.</p>
-                            </div>
-                        </div>
 
-                        <div class="payment-method">
-                            <div class="payment-method-header">
-                                <label>
-                                    <input type="radio" name="paymentMethod" value="BANK_TRANSFER">
-                                    Bank Transfer
-                                </label>
-                                <div>
-                                    <i class="fas fa-university fa-2x" style="color: #333;"></i>
+                            <div class="payment-option" style="flex: 1; min-width: 200px; border: 2px solid #ddd; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onclick="selectPaymentMethod(this, 'CASH')">
+                                <input type="radio" name="paymentMethod" value="CASH" style="display: none;">
+                                <div style="font-size: 40px; color: #4CAF50; margin-bottom: 15px;">
+                                    <i class="fas fa-money-bill-wave"></i>
                                 </div>
-                            </div>
-                            <div class="payment-method-details" style="margin-top: 15px; display: none;">
-                                <p>Please transfer the total amount to the following bank account:</p>
-                                <p><strong>Bank Name:</strong> Luxury Bank</p>
-                                <p><strong>Account Name:</strong> Luxury Hotel</p>
-                                <p><strong>Account Number:</strong> 1234567890</p>
-                                <p><strong>SWIFT Code:</strong> LUXURYBANK</p>
+                                <h4 style="margin-bottom: 10px; color: #333;">Cash</h4>
+                                <p style="color: #666; font-size: 14px;">Pay at hotel reception</p>
+                                <div class="selected-mark" style="position: absolute; top: 10px; right: 10px; color: #4CAF50; font-size: 20px; display: none;">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn-pay">Pay Now $<fmt:formatNumber value="${totalAmount}" pattern="#,##0.00" /></button>
+                    <div id="successMessage" style="display: none; background-color: #4CAF50; color: white; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px; animation: fadeIn 0.5s;">
+                        <div style="font-size: 50px; margin-bottom: 15px;">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div style="background-color: #4CAF50; color: white; padding: 10px 20px; border-radius: 30px; display: inline-block; margin: 15px 0; font-weight: bold; font-size: 24px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                            <i class="fas fa-check-circle"></i> PAID
+                        </div>
+                        <h2>Payment Successful!</h2>
+                        <p>Your booking has been confirmed. Thank you for choosing Luxury Hotel.</p>
+                        <div style="margin-top: 20px;">
+                            <a href="${pageContext.request.contextPath}/booking?id=${booking.id}" class="btn-light" style="background-color: rgba(255,255,255,0.2); color: white; border: 2px solid white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: 500; margin-right: 10px; display: inline-block;">
+                                <i class="fas fa-eye"></i> View Booking
+                            </a>
+                            <a href="${pageContext.request.contextPath}/bookings" class="btn-light" style="background-color: rgba(255,255,255,0.2); color: white; border: 2px solid white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: 500; display: inline-block;">
+                                <i class="fas fa-list"></i> My Bookings
+                            </a>
+                        </div>
+                    </div>
+
+                    <button type="button" id="payNowBtn" class="btn-pay">Pay Now $<fmt:formatNumber value="${totalAmount}" pattern="#,##0.00" /></button>
+                    <noscript>
+                        <!-- Fallback for when JavaScript is disabled -->
+                        <button type="submit" class="btn-pay" style="margin-top: 10px; background-color: #5a3921;">Submit Payment (JavaScript Disabled)</button>
+                    </noscript>
                 </form>
             </div>
         </div>
@@ -165,105 +191,90 @@
 
     <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Payment method selection
-            const paymentMethods = document.querySelectorAll('.payment-method');
-            const paymentForm = document.getElementById('paymentForm');
-
-            paymentMethods.forEach(method => {
-                method.addEventListener('click', function() {
-                    // Unselect all methods
-                    paymentMethods.forEach(m => {
-                        m.classList.remove('selected');
-                        m.querySelector('input[type="radio"]').checked = false;
-                        const details = m.querySelector('.payment-method-details');
-                        if (details) details.style.display = 'none';
-                    });
-
-                    // Select clicked method
-                    this.classList.add('selected');
-                    this.querySelector('input[type="radio"]').checked = true;
-                    const details = this.querySelector('.payment-method-details');
-                    if (details) details.style.display = 'block';
-                });
+        function selectPaymentMethod(element, method) {
+            // Reset all payment options
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            paymentOptions.forEach(option => {
+                option.style.border = '2px solid #ddd';
+                option.querySelector('input[type="radio"]').checked = false;
+                option.querySelector('.selected-mark').style.display = 'none';
+                option.querySelector('h4').style.color = '#333';
             });
 
-            // Format card number with spaces
-            const cardNumber = document.getElementById('cardNumber');
-            if (cardNumber) {
-                cardNumber.addEventListener('input', function(e) {
-                    let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-                    let formattedValue = '';
+            // Select the clicked option
+            element.style.border = '2px solid #5a3921';
+            element.querySelector('input[type="radio"]').checked = true;
+            element.querySelector('.selected-mark').style.display = 'block';
+            element.querySelector('h4').style.color = '#5a3921';
+        }
 
-                    for (let i = 0; i < value.length; i++) {
-                        if (i > 0 && i % 4 === 0) {
-                            formattedValue += ' ';
-                        }
-                        formattedValue += value[i];
-                    }
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentForm = document.getElementById('paymentForm');
+            const payNowBtn = document.getElementById('payNowBtn');
+            const successMessage = document.getElementById('successMessage');
 
-                    e.target.value = formattedValue;
-                });
-            }
+            // Add CSS for animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(-20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
 
-            // Format expiry date with slash
-            const expiryDate = document.getElementById('expiryDate');
-            if (expiryDate) {
-                expiryDate.addEventListener('input', function(e) {
-                    let value = e.target.value.replace(/\D/g, '');
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); }
+                }
 
-                    if (value.length > 2) {
-                        value = value.substring(0, 2) + '/' + value.substring(2, 4);
-                    }
+                .success-icon-pulse {
+                    animation: pulse 1.5s infinite;
+                }
+            `;
+            document.head.appendChild(style);
 
-                    e.target.value = value;
-                });
-            }
+            // Handle Pay Now button click
+            payNowBtn.addEventListener('click', function() {
+                const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
+                if (!selectedMethod) {
+                    alert('Please select a payment method');
+                    return;
+                }
 
-            // Form validation
+                // Show a simple confirmation dialog
+                if (!confirm('Confirm payment of $${totalAmount}?')) {
+                    return;
+                }
+
+                // Show success message with animation
+                payNowBtn.style.display = 'none';
+                successMessage.style.display = 'block';
+
+                // Add pulse animation to the success icon
+                const successIcon = successMessage.querySelector('i.fa-check-circle');
+                successIcon.classList.add('success-icon-pulse');
+
+                // Make sure the selected payment method is set
+                const paymentMethodValue = selectedMethod.value;
+                const paymentMethodInput = document.querySelector('input[name="paymentMethod"]');
+                if (paymentMethodInput) {
+                    paymentMethodInput.value = paymentMethodValue;
+                }
+
+                // Submit the form after a delay to allow the user to see the success message
+                setTimeout(function() {
+                    paymentForm.submit();
+                }, 3000); // 3 seconds delay
+            });
+
+            // Form validation (as a backup)
             paymentForm.addEventListener('submit', function(e) {
-                const selectedMethod = document.querySelector('.payment-method.selected');
+                const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
                 if (!selectedMethod) {
                     e.preventDefault();
                     alert('Please select a payment method');
                     return;
                 }
-
-                const methodValue = selectedMethod.querySelector('input[type="radio"]').value;
-
-                if (methodValue === 'CREDIT_CARD') {
-                    const cardNum = cardNumber.value.replace(/\s+/g, '');
-                    const expiry = expiryDate.value;
-                    const cvvValue = document.getElementById('cvv').value;
-                    const name = document.getElementById('cardName').value;
-
-                    if (!cardNum || cardNum.length < 16) {
-                        e.preventDefault();
-                        alert('Please enter a valid card number');
-                        return;
-                    }
-
-                    if (!expiry || expiry.length < 5) {
-                        e.preventDefault();
-                        alert('Please enter a valid expiry date');
-                        return;
-                    }
-
-                    if (!cvvValue || cvvValue.length < 3) {
-                        e.preventDefault();
-                        alert('Please enter a valid CVV');
-                        return;
-                    }
-
-                    if (!name) {
-                        e.preventDefault();
-                        alert('Please enter the name on the card');
-                        return;
-                    }
-                }
-
-                // In a real application, you would validate the card details with a payment gateway
-                // For this demo, we'll just submit the form
             });
         });
     </script>
